@@ -61,6 +61,8 @@ ROOT_URLCONF = 'beddit.urls'
 WSGI_APPLICATION = 'beddit.wsgi.application'
 
 
+AUTHENTICATION_BACKENDS = ('beddit.auth.BedditBackend',)
+
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 

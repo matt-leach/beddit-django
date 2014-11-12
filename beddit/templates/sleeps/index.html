@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div>
+		{% for date, score in data.items %}
+		<p>{{date}} {{score}} </p>
+		{% endfor %}
+	</div>
+{% endblock %}
