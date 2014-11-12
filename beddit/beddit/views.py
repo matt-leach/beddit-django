@@ -14,7 +14,6 @@ def home(request):
     if "token" in request.session and request.user.id is not None:
         user = request.user
         context = {}
-
         return render(request, 'home.html', context)
 
     else:
@@ -31,6 +30,7 @@ def login(request):
     except:
         return redirect("home")
         
+    # Custom authentication @ beddit.auth.BedditBackend
     user = authenticate(username=username, password=password, request=request)
     
     if user is not None:
