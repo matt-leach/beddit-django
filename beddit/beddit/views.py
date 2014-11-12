@@ -14,7 +14,7 @@ def home(request):
     # Check we have a token & a logged in user
     if "token" in request.session and request.user.id is not None:
         user = request.user
-        context = {"username": user.username}
+        context = {}
 
         return render(request, 'home.html', context)
 
@@ -39,9 +39,25 @@ def login(request):
         django_login(request, user)
         try:
             b = BedditClient(api_endpoint=settings.BEDDIT_API)
-            token = b.get_token(username, password)    
+            token, user_id = b.get_token(username, password)    
             request.session["token"] = token
-        except:
+            
+            print "got token"
+            # TODO: check this doesn't overwrite
+            if user.id != user_id:
+                user.delete()
+                u = User.objects.create(username=username, id=user_id)
+                
+                u.set_password(password)
+                u.save()
+                
+                # Re login
+                u = authenticate(username=username, password=password)
+                django_login(request, u)
+                
+            print "saved user"
+        except Exception as e:
+            print e
             django_logout(request)
             messages.add_message(request, messages.INFO, "Your details could not be authenticated.")
             # User cannot be verified.
@@ -52,15 +68,16 @@ def login(request):
         b = BedditClient(api_endpoint=settings.BEDDIT_API)
         try:
             # Get the user's token
-            token = b.get_token(username, password)
+            token, user_id = b.get_token(username, password)
             request.session["token"] = token
                         
             # Then create a user 
             try:
                 # May have changed their password
-                u = User.objects.get(username=username)
+                u = User.objects.get(username=username, id=user_id)
             except User.DoesNotExist:
-                u = User.objects.create(username=username)
+                # again TODO: check id doesn't overwrite 
+                u = User.objects.create(username=username, id=user_id)
                 
             u.set_password(password)
             u.save()
