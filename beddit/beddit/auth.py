@@ -22,9 +22,7 @@ class BedditBackend(object):
         try:
             # See if this username/password is valid
             token, user_id = b.get_token(username, password)   
-             
-            request.session["token"] = token
-            
+                         
             try:
                 # First see if this user exists
                 user = User.objects.get(id=user_id)
@@ -38,6 +36,7 @@ class BedditBackend(object):
                 user = User(username=username, id=user_id)
                 user.save()
                 
+            request.session["token"] = token  
             return user
             
         except: # TODO: more detailed exception

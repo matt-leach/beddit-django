@@ -10,6 +10,9 @@ from django.contrib.auth.models import User
 from pyBeddit.clients import BedditClient
 
 def home(request):
+    try: print request.session["token"]
+    except: pass
+    print request.user
     # Check we have a token & a logged in user
     if "token" in request.session and request.user.id is not None:
         user = request.user
@@ -34,7 +37,9 @@ def login(request):
     user = authenticate(username=username, password=password, request=request)
     
     if user is not None:
+        
         django_login(request, user)
+
         
     return redirect("home")
 
