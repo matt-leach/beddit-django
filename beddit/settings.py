@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import sys
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(__file__)
 TEMPLATE_DIRS = (BASE_DIR + "/templates/", )
 
 # Include pyBeddit
@@ -58,7 +58,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'beddit.urls'
 
-WSGI_APPLICATION = 'beddit.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 AUTHENTICATION_BACKENDS = ('beddit.auth.BedditBackend',)
