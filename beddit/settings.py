@@ -15,8 +15,10 @@ import sys
 BASE_DIR = os.path.dirname(__file__)
 TEMPLATE_DIRS = (BASE_DIR + "/templates/", )
 
-# Include pyBeddit
+# Include pyBeddit 
 sys.path.append(os.path.dirname(os.path.dirname(BASE_DIR))+"/pyBeddit/")
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(BASE_DIR)))+"/pyBeddit/")
+
 
 BEDDIT_API = "https://cloudapi.beddit.com"
 
@@ -27,11 +29,11 @@ BEDDIT_API = "https://cloudapi.beddit.com"
 SECRET_KEY = '9bf5@t#qledkd5p)lg4^67jn#h7aa4q#gpb+7yi$1u#f-*l#wr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["beddit.familyleach.net"]
 
 
 # Application definition
