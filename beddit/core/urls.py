@@ -3,9 +3,9 @@ from django.contrib import admin
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'beddit.views.home', name='home'),
-    url(r'^login/$', 'beddit.views.login', name='login'),
-    url(r'^logout/$', 'beddit.views.logout', name='logout'),
+    url(r'^$', 'core.views.home', name='home'),
+    url(r'^login/$', 'core.views.login', name='login'),
+    url(r'^logout/$', 'core.views.logout', name='logout'),
     url(r'^sleeps/$', include('sleeps.urls'), name="sleeps")
     # url(r'^blog/', include('blog.urls')),
 
