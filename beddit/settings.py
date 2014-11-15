@@ -59,12 +59,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'beddit.urls'
+ROOT_URLCONF = 'core.urls'
 
 WSGI_APPLICATION = 'wsgi.application'
 
 
-AUTHENTICATION_BACKENDS = ('beddit.auth.BedditBackend',)
+AUTHENTICATION_BACKENDS = ('core.auth.BedditBackend',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

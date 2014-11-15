@@ -22,7 +22,6 @@ class BedditBackend(object):
         try:
             # See if this username/password is valid
             token, user_id = b.get_token(username, password)   
-                         
             try:
                 # First see if this user exists
                 user = User.objects.get(id=user_id)
@@ -39,7 +38,7 @@ class BedditBackend(object):
             request.session["token"] = token  
             return user
             
-        except: # TODO: more detailed exception
+        except Exception: # TODO: more detailed exception
             messages.add_message(request, messages.INFO, "Your details could not be authenticated. Please try again.")
             return None
         
