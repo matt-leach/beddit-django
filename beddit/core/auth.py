@@ -21,7 +21,8 @@ class BedditBackend(object):
         b = BedditClient(api_endpoint=settings.BEDDIT_API)
         try:
             # See if this username/password is valid
-            token, user_id = b.get_token(username, password)   
+            token, user_id = b.get_token(username, password)             
+              
             try:
                 # First see if this user exists
                 user = User.objects.get(id=user_id)
