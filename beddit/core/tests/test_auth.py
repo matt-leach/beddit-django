@@ -17,9 +17,7 @@ class TestAuthentication(TestCase):
         Mock get_token method
         """
         if username == "alice": return "alice token", 1
-        
         elif username == "bob": return "bob token", 1
-        
         elif username == "eve": raise Exception()
     
     def get_request(self):
@@ -38,23 +36,23 @@ class TestAuthentication(TestCase):
         self.assertEqual(request.session["token"], "alice token")
            
         # Test now one user
-        self.assertEqual(len(User.objects.all()), 1)
-           
+        self.assertEqual(len(User.objects.all()), 1)      
         u = User.objects.all()[0]
            
+        # Check it's the same 
         self.assertEqual(user_created, u)
-           
+        
+        # Check the user has the properties we expect 
         self.assertEqual(u.username, "alice")
         self.assertEqual(u.password, "")
         self.assertEqual(u.is_superuser, False)
 
-
     @patch.object(BedditClient, 'get_token', fake_get_token)
     def test_auth_user_does_exist(self):
-        request = self.get_request()      
-            
+        request = self.get_request()    
+          
+        # Create the user we'll reference    
         self.assertEqual(len(User.objects.all()), 0)
-        
         u = User.objects.create(id=1, username="username")
                      
         user_got = authenticate(username="bob", password="password", request=request)
@@ -62,11 +60,9 @@ class TestAuthentication(TestCase):
         # Check the token is in the session
         self.assertEqual(request.session["token"], "bob token")
              
-        # Test still one user
+        # Test still one user, and it's the same
         self.assertEqual(len(User.objects.all()), 1)
-             
         self.assertEqual(user_got, u)
-         
          
          
          
