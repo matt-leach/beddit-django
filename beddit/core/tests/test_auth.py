@@ -23,7 +23,6 @@ class TestAuthentication(TestCase):
     def get_request(self):
         request = RequestFactory().get("")
         request.session = {}  
-        request._messages = FallbackStorage(request)
         return request
         
     @patch.object(BedditClient, 'get_token', fake_get_token)
@@ -76,10 +75,6 @@ class TestAuthentication(TestCase):
         # Failed auth should return no user
         self.assertTrue(user is None)
         
-        # Check messages
-        self.assertEqual(len(list(request._messages)), 1)
-        message = list(request._messages)[0]
-        self.assertEqual(str(message), "Your details could not be authenticated. Please try again.")
             
             
             

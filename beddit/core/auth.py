@@ -40,7 +40,6 @@ class BedditBackend(object):
             return user
             
         except Exception: # TODO: more detailed exception
-            messages.add_message(request, messages.INFO, "Your details could not be authenticated. Please try again.")
             return None
         
             
