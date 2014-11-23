@@ -29,7 +29,7 @@ BEDDIT_API = "https://cloudapi.beddit.com"
 SECRET_KEY = '9bf5@t#qledkd5p)lg4^67jn#h7aa4q#gpb+7yi$1u#f-*l#wr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 

@@ -31,10 +31,9 @@ def login(request):
         return redirect("home")
         
     # Custom authentication @ beddit.auth.BedditBackend
-    user, token = authenticate(username=username, password=password, request=request)
+    user = authenticate(username=username, password=password, request=request)
     
     if user is not None:  
-        request.session["token"] = token
         django_login(request, user)
     else:
         messages.add_message(request, messages.INFO, "Your details could not be authenticated. Please try again.")
