@@ -12,7 +12,7 @@ class TestSleepsIndexWithRequestFactory(TestCase):
     
     # Patch the get_sleep_scores function to return an empty dictionary
     @patch.object(BedditClient, 'get_sleep_scores', lambda x: {})
-    def test_index_requires_token(self):
+    def test_index_with_token(self):
         request = RequestFactory().get("/sleeps/")
         request.session = {"token": "TOKEN"}
         request.user = mommy.make(User)
@@ -38,5 +38,5 @@ class TestSleepsIndexWithRequestFactory(TestCase):
         request.user = None
         
         resp = index(request)
-        self.assertEqual(resp, HttpResponseRedirect)
+        self.assertEqual(type(resp), HttpResponseRedirect)
         self.assertEqual(resp["Location"], reverse("home"))
