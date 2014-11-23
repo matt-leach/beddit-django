@@ -19,7 +19,6 @@ def index(request):
         b = BedditClient(api_endpoint=settings.BEDDIT_API, token=request.session["token"], user_id=request.user.id)
                 
         sleep_data = b.get_sleep_scores()
-        print sleep_data
         
         data = [{"date": convert_date_format(date), "score": score} for date, score in sleep_data.items()]
         
