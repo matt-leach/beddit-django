@@ -1,7 +1,7 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import User
 from pyBeddit.clients import BedditClient
-from django.contrib import messages
 
 
 class BedditBackend(object):
@@ -10,14 +10,13 @@ class BedditBackend(object):
         
         Checks username/password.
         
-        If successful a token will be returned which we use to 
+        If successful a token will be added to the session which we use
         access the API.
         
         This ensures we do NOT store passwords anywhere.
     """
 
-    def authenticate(self, username=None, password=None, request=None):
-        
+    def authenticate(self, username=None, password=None, request=None):  
         b = BedditClient(api_endpoint=settings.BEDDIT_API)
         try:
             # See if this username/password is valid
@@ -41,17 +40,6 @@ class BedditBackend(object):
             
         except Exception: # TODO: more detailed exception
             return None
-        
-            
-            
-          
-        
-        
-        
-        
-        
-        
-
 
     def get_user(self, user_id):
         try:
