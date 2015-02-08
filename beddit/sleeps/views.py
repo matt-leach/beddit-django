@@ -5,7 +5,6 @@ from django.conf import settings
 import json
 from datetime import datetime
 
-import datetime
 
 from core.decorators import requires_token
 
@@ -17,10 +16,9 @@ def convert_date_format(date_string):
     return datetime.strptime(date_string, '%Y-%m-%d').strftime('%d/%m')
 
 def convert_epoch_to_time_after_3pm(secs):
-    t = datetime.datetime.fromtimestamp(secs)
+    t = datetime.fromtimestamp(secs)
     from_3 = t - t.replace(hour=15, minute=0, second=0)
 
-    
     return from_3.seconds / 3600.0 # Return in hours
 
 
@@ -67,7 +65,7 @@ def stacked(request):
         
         new_zones.append({"name": 0, "y0": y0, "y1": 24})
         
-        data.append({"date": date, "zones": new_zones})
+        data.append({"date": convert_date_format(date), "zones": new_zones})
         
         
         
